@@ -1,0 +1,159 @@
+-- [[ Hussein Hub - Speed Hub v2 (Rayfield Edition 2026) ]] --
+-- Credits: TikTok @hussain_90_1
+-- Developer: hussain_90_1
+
+local Players = game:GetService("Players")
+local StarterGui = game:GetService("StarterGui")
+local player = Players.LocalPlayer
+
+-- 1. نسخ حساب المطور الجديد وإشعار سريع
+if not player:FindFirstChild("HusseinHub_Rayfield_Run") then
+    local marker = Instance.new("BoolValue", player)
+    marker.Name = "HusseinHub_Rayfield_Run"
+    
+    setclipboard("hussain_90_1")
+    StarterGui:SetCore("SendNotification", {
+        Title = "⚡ Hussein Hub v2 ⚡",
+        Text = "تم نسخ حساب المطور hussain_90_1!",
+        Duration = 4
+    })
+end
+
+-- 2. تحميل مكتبة Rayfield UI
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+-- 3. إنشاء النافذة الرئيسية مع نظام المفتاح المدمج
+local Window = Rayfield:CreateWindow({
+   Name = "⚡ Hussein Hub v2 | 2026 ⚡",
+   LoadingTitle = "جاري تشغيل Hussein Hub...",
+   LoadingSubtitle = "بواسطة hussain_90_1",
+   ConfigurationSaving = {
+      Enabled = false,
+   },
+   Discord = {
+      Enabled = false,
+   },
+   KeySystem = true, -- تفعيل نظام المفتاح
+   KeySettings = {
+      Title = "نظام المفتاح | Key System",
+      Subtitle = "المطور: hussain_90_1",
+      Note = "2026",
+      FileName = "HusseinHubKey", 
+      SaveKey = true, 
+      GrabKeyFromUrl = false, 
+      Key = {"2026"} -- المفتاح الخاص بك
+   }
+})
+
+-- تعديل رسالة نظام المفتاح لتسهيل الحصول عليه
+Rayfield:Notify({
+   Title = "مفتاح التجربة",
+   Content = "2026",
+   Duration = 5,
+   Image = 4483362458,
+})
+
+-- 4. إنشاء التبويبات (Tabs)
+local MainTab = Window:CreateTab("🏠 الرئيسية", 4483362458) -- تبويب التحكم
+local CreditsTab = Window:CreateTab("📜 الحقوق", 4483362458) -- تبويب المطور
+
+-- 5. محتويات التبويب الرئيسي (السرعة والقفز)
+
+-- قسم السرعة
+MainTab:CreateSection("⚡ قسم السرعة (Speed)")
+
+local SpeedInput = MainTab:CreateInput({
+   Name = "اكتب السرعة المخصصة",
+   PlaceholderText = "مثال: 50",
+   RemoveTextAfterFocusLost = false,
+   Callback = function(Text)
+      local num = tonumber(Text)
+      if num then
+         local char = player.Character or player.CharacterAdded:Wait()
+         local humanoid = char:FindFirstChildOfClass("Humanoid")
+         if humanoid then humanoid.WalkSpeed = num end
+      end
+   end,
+})
+
+MainTab:CreateButton({
+   Name = "🚀 تفعيل سرعة خارقة",
+   Callback = function()
+      local char = player.Character or player.CharacterAdded:Wait()
+      local humanoid = char:FindFirstChildOfClass("Humanoid")
+      if humanoid then humanoid.WalkSpeed = 250 end
+   end,
+})
+
+-- قسم القفز
+MainTab:CreateSection("🦘 قسم القفز (Jump)")
+
+local JumpInput = MainTab:CreateInput({
+   Name = "اكتب قوة القفز المخصصة",
+   PlaceholderText = "مثال: 100",
+   RemoveTextAfterFocusLost = false,
+   Callback = function(Text)
+      local num = tonumber(Text)
+      if num then
+         local char = player.Character or player.CharacterAdded:Wait()
+         local humanoid = char:FindFirstChildOfClass("Humanoid")
+         if humanoid then 
+            humanoid.UseJumpPower = true
+            humanoid.JumpPower = num 
+         end
+      end
+   end,
+})
+
+-- زر إعادة الوضع الطبيعي
+MainTab:CreateSection("⚙️ إعادة الضبط")
+
+MainTab:CreateButton({
+   Name = "🔄 إعادة السرعة والقفز للطبيعي",
+   Callback = function()
+      local char = player.Character or player.CharacterAdded:Wait()
+      local humanoid = char:FindFirstChildOfClass("Humanoid")
+      if humanoid then 
+         humanoid.WalkSpeed = 16 
+         humanoid.JumpPower = 50
+      end
+   end,
+})
+
+-- 6. محتويات تبويب الحقوق (Credits)
+CreditsTab:CreateSection("👑 معلومات المطور")
+
+CreditsTab:CreateParagraph({Title = "المطور المعتمد:", Content = "hussain_90_1"})
+CreditsTab:CreateParagraph({Title = "حساب التيك توك:", Content = "TikTok: @hussain_90_1"})
+
+CreditsTab:CreateButton({
+   Name = "📋 نسخ اسم الحساب مجدداً",
+   Callback = function()
+      setclipboard("hussain_90_1")
+      Rayfield:Notify({
+         Title = "تم النسخ!",
+         Content = "تم نسخ hussain_90_1 إلى الحافظة.",
+         Duration = 3,
+         Image = 4483362458,
+      })
+   end,
+})
+
+-- 7. نظام إشعارات السيرفر المدمج مع Rayfield UI
+Players.PlayerAdded:Connect(function(p)
+   Rayfield:Notify({
+      Title = "➕ دخول لاعب",
+      Content = p.Name .. " دخل السيرفر الآن.",
+      Duration = 3,
+      Image = 4483362458,
+   })
+end)
+
+Players.PlayerRemoving:Connect(function(p)
+   Rayfield:Notify({
+      Title = "➖ خروج لاعب",
+      Content = p.Name .. " غادر السيرفر الآن.",
+      Duration = 3,
+      Image = 4483362458,
+   })
+end)
